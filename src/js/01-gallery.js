@@ -1,5 +1,5 @@
 // Add imports above this line
-import SimpleLightbox from "simplelightbox";
+import simpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 import { galleryItems } from './gallery-items';
 // Change code below this line
@@ -29,7 +29,7 @@ ref.containerForGallery.addEventListener(`click`, openModalWindow)
 function openModalWindow(event) {
     console.log(event.target.dataset.source);
     event.preventDefault();
-    const instance = basicLightbox.create(`
+    const instance = simpleLightbox.create(`
     <div class="modal">
     <img src="${event.target.dataset.source}" width="800" height="600">
     </div>
@@ -37,7 +37,7 @@ function openModalWindow(event) {
     instance.show();
     window.addEventListener('keydown', function (e) {
 
-        if (!basicLightbox.visible()) { return };
+        if (!simpleLightbox.visible()) { return };
         if (e.key == 'Escape' || e.key == 'Esc' || e.key == 27) {
             e.preventDefault();
             instance.close();
