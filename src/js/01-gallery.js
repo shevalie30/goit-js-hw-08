@@ -1,48 +1,33 @@
 // Add imports above this line
-import simpleLightbox from "simplelightbox";
-import "simplelightbox/dist/simple-lightbox.min.css";
 import { galleryItems } from './gallery-items';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 // Change code below this line
 const ref = {
     containerForGallery: document.querySelector('.gallery'),
-}
+};
 
 let galleryItem = '';
-const buildGallery = galleryItems.map((key) => {
+const buildGallery = galleryItems.map(({ original, preview, description }) => {
     galleryItem += `
         <div class="gallery__item">
-        <a class="gallery__link" href="#">
+        <a class="gallery__link" href="${original}">
                 <img
                     class="gallery__image"
-                    src="${key.preview}"
-                    data-source="${key.original}"
-                    alt="${key.description}"
+                    src="${preview}"
+                    data-source="${original}"
+                    alt="${description}"
                 />
                 </a>
         </div>`;
-})
+});
 
-ref.containerForGallery.insertAdjacentHTML("afterbegin", galleryItem)
+ref.containerForGallery.innerHTML = galleryItem;
 
-ref.containerForGallery.addEventListener(`click`, openModalWindow)
 
-function openModalWindow(event) {
-    console.log(event.target.dataset.source);
-    event.preventDefault();
-    const instance = simpleLightbox.create(`
-    <div class="modal">
-    <img src="${event.target.dataset.source}" width="800" height="600">
-    </div>
-	`);
-    instance.show();
-    window.addEventListener('keydown', function (e) {
+new SimpleLightbox('.gallery__link', {
+    captionsData: "alt",
+    captionDelay: 250,
 
-        if (!simpleLightbox.visible()) { return };
-        if (e.key == 'Escape' || e.key == 'Esc' || e.key == 27) {
-            e.preventDefault();
-            instance.close();
-        }
-    });
-
-}
+});
 console.log(galleryItems);
