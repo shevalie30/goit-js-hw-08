@@ -8,7 +8,7 @@ const refs = {
     inputFormEmail: document.querySelector('[type="email"]'),
     inputFormMessage: document.querySelector('[name="message"]'),
     inputFormSubmitBtn: document.querySelector('[type="submit"]'),
-}
+};
 
 fillForm();
 
@@ -29,10 +29,11 @@ function onFormSubmit(event) {
     // formData = {};
 };
 
+
 function fillForm() {
-    const data = localStorage.getItem(STORAGE_KEY);
+    const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
     if (data) {
-        refs.inputFormEmail.value = formData.email || '';
-        refs.inputFormMessage.value = formData.message || '';
+        refs.inputFormEmail.value = data.email || '';
+        refs.inputFormMessage.value = data.message || '';
     }
 }
